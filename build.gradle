@@ -40,7 +40,7 @@ repositories {
     String mavenUsername = project.hasProperty('mavenUsername') ? project.mavenUsername : System.getenv('mavenUsername');
     String mavenPassword = project.hasProperty('mavenPassword') ? project.mavenPassword : System.getenv('mavenPassword');
 
-    if(mavenUsername != null && mavenPassword != null) {
+    if (mavenUsername != null && mavenPassword != null) {
         maven {
             url 'https://repo.bg-software.com/repository/private-libs/'
             credentials {
@@ -49,7 +49,6 @@ repositories {
             }
         }
     }
-
 }
 
 dependencies {
@@ -97,7 +96,7 @@ jar {
 }
 
 processResources {
-    outputs.upToDateWhen {false}
+    outputs.upToDateWhen { false }
     String versionNumber = System.getenv("BUILD_NUMBER") == null ? version : version + "-DEVb" + System.getenv("BUILD_NUMBER")
     eachFile { details ->
         if (details.name.contentEquals('plugin.yml')) {
@@ -109,10 +108,9 @@ processResources {
 }
 
 shadowJar {
-    if(System.getenv("BUILD_NUMBER") == null){
+    if (System.getenv("BUILD_NUMBER") == null) {
         archiveName = rootProject.name + ".jar"
-    }
-    else{
+    } else {
         archiveName = rootProject.name + "-b" + System.getenv("BUILD_NUMBER") + ".jar"
     }
 
