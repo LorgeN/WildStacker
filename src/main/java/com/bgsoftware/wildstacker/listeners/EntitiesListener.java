@@ -8,7 +8,6 @@ import com.bgsoftware.wildstacker.api.enums.StackSplit;
 import com.bgsoftware.wildstacker.api.enums.UnstackResult;
 import com.bgsoftware.wildstacker.api.objects.StackedEntity;
 import com.bgsoftware.wildstacker.hooks.JobsHook;
-import com.bgsoftware.wildstacker.hooks.McMMOHook;
 import com.bgsoftware.wildstacker.hooks.PluginHooks;
 import com.bgsoftware.wildstacker.hooks.ProtocolLibHook;
 import com.bgsoftware.wildstacker.listeners.events.EntityPickupItemEvent;
@@ -292,9 +291,6 @@ public final class EntitiesListener implements Listener {
                 Executor.sync(() -> livingEntity.setVelocity(new Vector()), 1L);
             }
 
-            if(damager != null)
-                McMMOHook.handleCombat(damager, entityDamager, livingEntity, e.getFinalDamage());
-
             EntityDamageEvent clonedEvent = createDamageEvent(e.getEntity(), e.getCause(), e.getDamage(), entityDamager);
 
             double originalDamage = e.getDamage();
@@ -415,9 +411,6 @@ public final class EntitiesListener implements Listener {
 
                         stackedEntity.setStackAmount(unstackAmount, false);
 
-                        McMMOHook.updateCachedName(livingEntity);
-                        boolean isMcMMOSpawnedEntity = McMMOHook.isSpawnerEntity(livingEntity);
-
                         // I set the health to 0 so it will be 0 in the EntityDeathEvent
                         // Some plugins, such as MyPet, check for that value
                         double originalHealth = livingEntity.getHealth();
@@ -447,9 +440,6 @@ public final class EntitiesListener implements Listener {
                         stackedEntity.setStackAmount(currentStackAmount, false);
 
                         livingEntity.setLastDamageCause(null);
-
-                        if(isMcMMOSpawnedEntity)
-                            McMMOHook.updateSpawnedEntity(livingEntity);
 
                         JobsHook.updateSpawnReason(livingEntity, stackedEntity.getSpawnCause());
 

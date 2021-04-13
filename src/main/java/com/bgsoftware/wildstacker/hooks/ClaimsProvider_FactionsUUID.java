@@ -1,5 +1,6 @@
 package com.bgsoftware.wildstacker.hooks;
 
+import com.bgsoftware.wildstacker.api.hooks.ClaimsProvider;
 import com.massivecraft.factions.Board;
 import com.massivecraft.factions.FLocation;
 import com.massivecraft.factions.FPlayer;
@@ -8,7 +9,7 @@ import com.massivecraft.factions.Faction;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-public final class ClaimsProvider_FactionsUUID implements ClaimsProvider{
+public final class ClaimsProvider_FactionsUUID implements ClaimsProvider {
 
     @Override
     public boolean hasClaimAccess(Player player, Location location) {

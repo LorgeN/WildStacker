@@ -1,5 +1,6 @@
 package com.bgsoftware.wildstacker.hooks;
 
+import com.bgsoftware.wildstacker.api.hooks.ClaimsProvider;
 import com.massivecraft.factions.entity.BoardColl;
 import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.MPlayer;

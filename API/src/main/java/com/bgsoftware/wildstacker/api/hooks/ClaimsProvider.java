@@ -1,4 +1,4 @@
-package com.bgsoftware.wildstacker.hooks;
+package com.bgsoftware.wildstacker.api.hooks;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

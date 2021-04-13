@@ -1,4 +1,4 @@
-package com.bgsoftware.wildstacker.hooks;
+package com.bgsoftware.wildstacker.api.hooks;
 
 import com.bgsoftware.wildstacker.api.objects.StackedSpawner;
 import com.bgsoftware.wildstacker.api.upgrades.SpawnerUpgrade;
