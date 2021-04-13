@@ -9,14 +9,24 @@
 <a href=""><img src="https://img.shields.io/maintenance/yes/2020"></a>
 </p>
 
+## Modified for [CrazyWars](https://crazywars.me)
+
+This version has been modified for use in the CrazyWars Minecraft server.
+
+Modifications
+
+- Removed dependencies on proprietary plugins
+- Added support for manually providing providers/hooks without reflection
+
 ## Compiling
 
 You can compile the project using gradlew.<br>
-Run `gradlew shadowJar build` in console to build the project.<br>
+Run `gradlew jar build` in console to build the project.<br>
 You can find already compiled jars on our [Jenkins](https://hub.bg-software.com/) hub!<br>
 You must add yourself all the private jars or purchase access to our private repository.
 
 ##### Private Jars:
+
 - Boss (latest & v3.9.7) by kangarko [[link]](https://www.spigotmc.org/resources/46497/)
 - Citizens by fullwall [[link]](https://www.spigotmc.org/resources/13811/)
 - CustomBosses by AMinecraftDev
@@ -29,9 +39,13 @@ You must add yourself all the private jars or purchase access to our private rep
 
 ## API
 
-The plugin is packed with a rich API for interacting with entities, items and more. When hooking into the plugin, it's highly recommended to only use the API and not the compiled plugin, as the API methods are not only commented, but also will not get removed or changed unless they are marked as deprecated. This means that by using the API, you won't have to do any additional changes to your code between updates.
+The plugin is packed with a rich API for interacting with entities, items and more. When hooking into the plugin, it's
+highly recommended to only use the API and not the compiled plugin, as the API methods are not only commented, but also
+will not get removed or changed unless they are marked as deprecated. This means that by using the API, you won't have
+to do any additional changes to your code between updates.
 
 ##### Maven
+
 ```
 <repositories>
     <repository>
@@ -48,7 +62,9 @@ The plugin is packed with a rich API for interacting with entities, items and mo
     </dependency>
 </dependencies>
 ```
+
 ##### Gradle
+
 ```
 repositories {
     maven { url 'https://repo.bg-software.com/repository/api/' }
@@ -58,11 +74,12 @@ dependencies {
     compileOnly 'com.bgsoftware:WildStackerAPI:latest'
 }
 ```
+
 ## Updates
 
-This plugin is provided "as is", which means no updates or new features are guaranteed. We will do our best to keep 
+This plugin is provided "as is", which means no updates or new features are guaranteed. We will do our best to keep
 updating and pushing new updates, and you are more than welcome to contribute your time as well and make pull requests
-for bug fixes. 
+for bug fixes.
 
 ## License
 

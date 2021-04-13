@@ -87,6 +87,8 @@ dependencies {
 }
 
 jar {
+    dependsOn(shadowJar)
+
     from {
         for (File file : new File("archive").listFiles()) {
             zipTree(file)
@@ -107,8 +109,6 @@ processResources {
 }
 
 shadowJar {
-    dependsOn(jar)
-
     if(System.getenv("BUILD_NUMBER") == null){
         archiveName = rootProject.name + ".jar"
     }
@@ -125,13 +125,8 @@ shadowJar {
     configurations = [project.configurations.getByName("runtimeClasspath")]
 }
 
-clean {
-    delete file('./archive/')
-}
-
 build {
     dependsOn shadowJar
-    dependsOn clean
 }
 
 publish.shouldRunAfter shadowJar
