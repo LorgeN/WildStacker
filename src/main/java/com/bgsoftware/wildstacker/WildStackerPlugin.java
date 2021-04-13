@@ -65,8 +65,8 @@ public final class WildStackerPlugin extends JavaPlugin implements WildStacker {
         plugin = this;
         new Metrics(this);
 
-        loadNMSAdapter();
-        loadAPI();
+        this.loadNMSAdapter();
+        this.loadAPI();
 
         if (!shouldEnable) {
             log("&cThere was an error while loading the plugin.");
@@ -183,23 +183,45 @@ public final class WildStackerPlugin extends JavaPlugin implements WildStacker {
     }
 
     private void loadNMSAdapter() {
+        log("Loading NMS adapters...");
+
         String bukkitVersion = ServerVersion.getBukkitVersion();
+
         try {
-            nmsAdapter = (NMSAdapter) Class.forName(
-                "com.bgsoftware.wildstacker.nms.NMSAdapter_" + bukkitVersion).newInstance();
-            nmsHolograms = (NMSHolograms) Class.forName(
-                "com.bgsoftware.wildstacker.nms.NMSHolograms_" + bukkitVersion).newInstance();
-            nmsSpawners = (NMSSpawners) Class.forName(
-                "com.bgsoftware.wildstacker.nms.NMSSpawners_" + bukkitVersion).newInstance();
+            if (this.nmsAdapter == null) {
+                log("Loading " + bukkitVersion + " NMS adapter...");
+                this.nmsAdapter = (NMSAdapter) Class.forName(
+                    "com.bgsoftware.wildstacker.nms.NMSAdapter_" + bukkitVersion).newInstance();
+
+            }
+
+            if (this.nmsHolograms == null) {
+                log("Loading " + bukkitVersion + " NMS holograms...");
+                this.nmsHolograms = (NMSHolograms) Class.forName(
+                    "com.bgsoftware.wildstacker.nms.NMSHolograms_" + bukkitVersion).newInstance();
+            }
+
+            if (this.nmsSpawners == null) {
+                log("Loading " + bukkitVersion + " NMS spawners...");
+                this.nmsSpawners = (NMSSpawners) Class.forName(
+                    "com.bgsoftware.wildstacker.nms.NMSSpawners_" + bukkitVersion).newInstance();
+            }
         } catch (Exception ex) {
             log("WildStacker doesn't support " + bukkitVersion + " - shutting down...");
             shouldEnable = false;
         }
     }
 
-    public void setNmsHolograms(NMSHolograms holograms) {
-        this.nmsHolograms = holograms;
-        WildStackerPlugin.log("Using custom holograms " + holograms + "!");
+    public void setNmsAdapter(NMSAdapter nmsAdapter) {
+        this.nmsAdapter = nmsAdapter;
+    }
+
+    public void setNmsHolograms(NMSHolograms nmsHolograms) {
+        this.nmsHolograms = nmsHolograms;
+    }
+
+    public void setNmsSpawners(NMSSpawners nmsSpawners) {
+        this.nmsSpawners = nmsSpawners;
     }
 
     public NMSAdapter getNMSAdapter() {

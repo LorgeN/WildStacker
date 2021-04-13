@@ -5,6 +5,7 @@ import com.bgsoftware.wildstacker.api.hooks.ClaimsProvider;
 import com.bgsoftware.wildstacker.api.hooks.SpawnersProvider;
 import com.bgsoftware.wildstacker.api.objects.StackedSpawner;
 import com.bgsoftware.wildstacker.api.upgrades.SpawnerUpgrade;
+import com.bgsoftware.wildstacker.events.WildStackerSpawnersLoadEvent;
 import com.bgsoftware.wildstacker.hooks.ClaimsProvider_FactionsUUID;
 import com.bgsoftware.wildstacker.hooks.ClaimsProvider_MassiveFactions;
 import com.bgsoftware.wildstacker.hooks.ClaimsProvider_WorldGuard;
@@ -94,6 +95,20 @@ public final class ProvidersHandler {
     }
 
     private void loadSpawnersProvider() {
+        if (this.spawnersProvider != null) {
+            return;
+        }
+
+        WildStackerSpawnersLoadEvent event = new WildStackerSpawnersLoadEvent();
+        Bukkit.getPluginManager().callEvent(event);
+
+        if (event.getSpawnersProvider() != null) {
+            WildStackerPlugin.log(
+                "Loading custom spawners provider: " + event.getSpawnersProvider());
+            this.spawnersProvider = event.getSpawnersProvider();
+            return;
+        }
+
         if (Bukkit.getPluginManager().isPluginEnabled("SilkSpawners") &&
             Bukkit.getPluginManager().getPlugin(
                 "SilkSpawners").getDescription().getAuthors().contains("xGhOsTkiLLeRx")) {
@@ -103,11 +118,6 @@ public final class ProvidersHandler {
         } else {
             spawnersProvider = new SpawnersProvider_Default();
         }
-    }
-
-    public void setSpawnersProvider(SpawnersProvider provider) {
-        this.spawnersProvider = provider;
-        WildStackerPlugin.log("Spawner provider updated to " + provider);
     }
 
     private void loadClaimsProvider() {
