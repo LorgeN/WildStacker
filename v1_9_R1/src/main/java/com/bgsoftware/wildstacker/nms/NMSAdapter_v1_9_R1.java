@@ -104,6 +104,11 @@ public final class NMSAdapter_v1_9_R1 implements NMSAdapter {
      */
 
     @Override
+    public boolean isCustomEntity(org.bukkit.entity.Entity entity) {
+        return !((CraftEntity) entity).getHandle().getClass().getPackage().getName().startsWith("net.minecraft");
+    }
+
+    @Override
     public <T extends org.bukkit.entity.Entity> T createEntity(Location location, Class<T> type, SpawnCause spawnCause, Consumer<T> beforeSpawnConsumer, Consumer<T> afterSpawnConsumer) {
         CraftWorld world = (CraftWorld) location.getWorld();
 

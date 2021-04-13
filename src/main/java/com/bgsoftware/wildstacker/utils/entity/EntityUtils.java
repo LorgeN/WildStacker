@@ -155,7 +155,11 @@ public final class EntityUtils {
     public static boolean isStackable(Entity entity) {
         return (MythicMobsHook.isMythicMob(entity) ||
             (entity instanceof LivingEntity && !entity.getType().name().equals(
-                "ARMOR_STAND") && !(entity instanceof Player)));
+                "ARMOR_STAND") && !(entity instanceof Player))) && !isCustomEntity(entity);
+    }
+
+    public static boolean isCustomEntity(Entity entity) {
+        return plugin.getNMSAdapter().isCustomEntity(entity);
     }
 
     public static void giveExp(Player player, int amount) {

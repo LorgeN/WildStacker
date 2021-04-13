@@ -40,6 +40,8 @@ public interface NMSAdapter {
      *   Entity methods
      */
 
+    boolean isCustomEntity(Entity entity);
+
     <T extends Entity> T createEntity(Location location, Class<T> type, SpawnCause spawnCause, Consumer<T> beforeSpawnConsumer, Consumer<T> afterSpawnConsumer);
 
     Zombie spawnZombieVillager(Villager villager);
