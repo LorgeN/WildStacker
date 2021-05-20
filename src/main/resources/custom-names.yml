@@ -12,6 +12,21 @@ enabled: true
 # Please follow the "ITEM_TYPE: CUSTOM_NAME", "'ITEM_TYPE:ITEM_DATA': CUSTOM_NAME" and "ENTITY_TYPE: CUSTOM_NAME" formats.
 # {0} represents item's name, if found
 
+'INK_SACK:0': 'Ink Sack'
+'INK_SACK:1': 'Red Dye'
+'INK_SACK:2': 'Green Dye'
+'INK_SACK:3': 'Cocoa Beans'
+'INK_SACK:4': 'Lapis Lazuli'
+'INK_SACK:5': 'Purple Dye'
+'INK_SACK:6': 'Cyan Dye'
+'INK_SACK:7': 'Light Gray Dye'
+'INK_SACK:8': 'Gray Dye'
+'INK_SACK:9': 'Pink Dye'
+'INK_SACK:10': 'Lime Dye'
+'INK_SACK:11': 'Yellow Dye'
+'INK_SACK:12': 'Light Blue Dye'
+'INK_SACK:13': 'Magenta Dye'
+'INK_SACK:14': 'Orange Dye'
 'INK_SACK:15': 'Bone Meal'
 MOB_SPAWNER: '{0}'
 PIG: 'Piggy'
