@@ -2,7 +2,6 @@ package com.bgsoftware.wildstacker.nms;
 
 import com.bgsoftware.common.reflection.ReflectField;
 import com.bgsoftware.common.reflection.ReflectMethod;
-import com.bgsoftware.wildstacker.WildStackerPlugin;
 import com.bgsoftware.wildstacker.api.enums.SpawnCause;
 import com.bgsoftware.wildstacker.api.objects.StackedEntity;
 import com.bgsoftware.wildstacker.api.objects.StackedItem;
@@ -69,6 +68,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Squid;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -422,14 +422,14 @@ public final class NMSAdapter_v1_8_R3 implements NMSAdapter {
 
     @Override
     public void playDeathSound(LivingEntity livingEntity) {
-        EntityLiving entityLiving = ((CraftLivingEntity) livingEntity).getHandle();
-
-        String deathSound = GET_SOUND_DEATH.invoke(entityLiving);
-        if (deathSound == null) {
-            WildStackerPlugin.log("Death sound was null for entity " + livingEntity);
+        if (livingEntity instanceof Squid) {
+            // Squid has no sounds until 1.9
             return;
         }
 
+        EntityLiving entityLiving = ((CraftLivingEntity) livingEntity).getHandle();
+
+        String deathSound = GET_SOUND_DEATH.invoke(entityLiving);
         float soundVolume = GET_SOUND_VOLUME.invoke(entityLiving);
         float soundPitch = GET_SOUND_PITCH.invoke(entityLiving);
 
