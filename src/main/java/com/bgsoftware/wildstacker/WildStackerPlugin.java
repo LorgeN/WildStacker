@@ -16,7 +16,6 @@ import com.bgsoftware.wildstacker.listeners.EntitiesListener;
 import com.bgsoftware.wildstacker.listeners.ItemsListener;
 import com.bgsoftware.wildstacker.listeners.MenusListener;
 import com.bgsoftware.wildstacker.listeners.NoClaimConflictListener;
-import com.bgsoftware.wildstacker.listeners.PlayersListener;
 import com.bgsoftware.wildstacker.listeners.ShulkerOversizedPatch;
 import com.bgsoftware.wildstacker.listeners.SpawnersListener;
 import com.bgsoftware.wildstacker.listeners.StewListener;
@@ -38,6 +37,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
@@ -95,33 +95,29 @@ public final class WildStackerPlugin extends JavaPlugin implements WildStacker {
 
         Locale.reload();
 
+        PluginManager pluginManager = getServer().getPluginManager();
+
         if (ServerVersion.isAtLeast(ServerVersion.v1_8)) {
-            getServer().getPluginManager().registerEvents(new BarrelsListener(this), this);
+            pluginManager.registerEvents(new BarrelsListener(this), this);
         }
-        getServer().getPluginManager().registerEvents(new BucketsListener(this), this);
-        getServer().getPluginManager().registerEvents(new ChunksListener(this), this);
-        getServer().getPluginManager().registerEvents(new EntitiesListener(this), this);
-        getServer().getPluginManager().registerEvents(new ItemsListener(this), this);
-        getServer().getPluginManager().registerEvents(new MenusListener(), this);
-        getServer().getPluginManager().registerEvents(new NoClaimConflictListener(this), this);
-        getServer().getPluginManager().registerEvents(new PlayersListener(this), this);
-        getServer().getPluginManager().registerEvents(new ShulkerOversizedPatch(), this);
-        getServer().getPluginManager().registerEvents(new SpawnersListener(this), this);
-        getServer().getPluginManager().registerEvents(new StewListener(this), this);
-        getServer().getPluginManager().registerEvents(new ToolsListener(this), this);
-        getServer().getPluginManager().registerEvents(new WorldsListener(this), this);
+
+        pluginManager.registerEvents(new BucketsListener(this), this);
+        pluginManager.registerEvents(new ChunksListener(this), this);
+        pluginManager.registerEvents(new EntitiesListener(this), this);
+        pluginManager.registerEvents(new ItemsListener(this), this);
+        pluginManager.registerEvents(new MenusListener(), this);
+        pluginManager.registerEvents(new NoClaimConflictListener(this), this);
+        pluginManager.registerEvents(new ShulkerOversizedPatch(), this);
+        pluginManager.registerEvents(new SpawnersListener(this), this);
+        pluginManager.registerEvents(new StewListener(this), this);
+        pluginManager.registerEvents(new ToolsListener(this), this);
+        pluginManager.registerEvents(new WorldsListener(this), this);
+
         EventsListener.register(this);
 
         CommandsHandler commandsHandler = new CommandsHandler(this);
         getCommand("stacker").setExecutor(commandsHandler);
         getCommand("stacker").setTabCompleter(commandsHandler);
-
-        if (Updater.isOutdated()) {
-            log("");
-            log("A new version is available (v" + Updater.getLatestVersion() + ")!");
-            log("Version's description: \"" + Updater.getVersionDescription() + "\"");
-            log("");
-        }
 
         log("******** ENABLE DONE ********");
     }
